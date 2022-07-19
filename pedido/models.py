@@ -8,6 +8,7 @@ class Pedido(models.Model):
     numero = models.CharField(max_length=7)
     cliente = models.ForeignKey(Cliente, on_delete=models.PROTECT, default='')
 
+
     def __str__(self):
         return str(self.cliente)
 
@@ -18,9 +19,13 @@ class Pedido(models.Model):
 
     @property
     def faturamento_total(self):
-        queryset = self.itens.filter().aggregate(faturamento_total=models.Sum('total'))
+        queryset = self.itens.all().aggregate(faturamento_total=models.Sum('faturamento_total'))
         return queryset['faturamento_total']
 
+    @property
+    def lucro(self):
+        queryset = self.itens.all().aggregate(lucro=models.Sum('lucro'))
+        return queryset['lucro']
 
 class ItemDoPedido(models.Model):
     pedido = models.ForeignKey(Pedido, on_delete=models.CASCADE, related_name='itens')

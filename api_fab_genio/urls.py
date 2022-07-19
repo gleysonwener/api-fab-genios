@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path, include
-from pedido.views import PedidoViewSet, ListaPedidoClienteViewSet, FaturamentoTotalViewSet
+from pedido.views import PedidoViewSet, ListaPedidoClienteViewSet, FaturamentoTotalViewSet, LucroViewSet
 from cliente.views import ClienteViewSet
 from produto.views import ProdutoViewSet
 from rest_framework.routers import DefaultRouter
@@ -12,6 +12,7 @@ router.register(r'produto', ProdutoViewSet, basename='Produto')
 router.register(r'pedido', PedidoViewSet, basename='Pedido')
 router.register(r'pedido/cliente', ListaPedidoClienteViewSet, basename='ListaPedidoCliente')
 router.register(r'pedido/faturamento', FaturamentoTotalViewSet, basename='FaturamentoTotal')
+router.register(r'pedido/lucro', LucroViewSet, basename='LucroView')
 urlpatterns = router.urls
 
 urlpatterns = [
