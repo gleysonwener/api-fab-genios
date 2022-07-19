@@ -29,8 +29,6 @@ class FaturamentoTotalSerializer(serializers.ModelSerializer):
         model = Pedido
         fields = ('faturamento_total',)
 
-    def get_faturamento_total(self, instance):
-        return instance.quantidade * instance.produto.preco
 
 
 class LucroSerializer(serializers.ModelSerializer):
@@ -38,5 +36,3 @@ class LucroSerializer(serializers.ModelSerializer):
         model = Pedido
         fields = ('lucro',)
 
-    def get_lucro(self, instance):
-        return instance.produto.preco - instance.produto.preco_custo

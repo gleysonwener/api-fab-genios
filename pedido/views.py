@@ -29,11 +29,13 @@ class FaturamentoTotalViewSet(viewsets.ModelViewSet):
         serializer = FaturamentoTotalSerializer(faturamento_total)
         return Response(serializer.data)
 
+
 class LucroViewSet(viewsets.ModelViewSet):
     queryset = Pedido.objects.all()
     serializer_class = LucroSerializer
 
     def list(self, request, *args, **kwargs):
+
         queryset = self.queryset
         lucro = queryset.lucro
         serializer = LucroSerializer(lucro)
