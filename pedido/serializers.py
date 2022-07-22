@@ -24,10 +24,9 @@ class ListaPedidoClienteSerializer(serializers.ModelSerializer):
         fields = ('id', 'cliente',)
 
 class FaturamentoTotalSerializer(serializers.ModelSerializer):
-    itens = ItemDoPedidoSerializer(many=True)
-    class Meta:
+     class Meta:
         model = Pedido
-        fields = ('faturamento_total',)
+        fields = ('id', 'numero', 'cliente', 'itens', 'total', 'total_faturamento')
 
 
 

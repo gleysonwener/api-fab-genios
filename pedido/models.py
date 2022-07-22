@@ -1,7 +1,7 @@
 from django.db import models
 from cliente.models import  Cliente
 from produto.models import Produto
-from django.db.models import F
+from django.db.models import F, Sum
 
 
 class Pedido(models.Model):
@@ -22,8 +22,15 @@ class Pedido(models.Model):
 
     @property
     def faturamento_total(self):
-        queryset = self.itens.all().aggregate(faturamento_total=models.Sum('produto.preco'))
-        return queryset['faturamento_total']
+        total_venda = self.itens.all().aggregate(
+            total=models.Sum(F('quantidade') * F('produto__preco')))
+
+        self.valor = total_venda
+
+        faturamento_total = self.itens.all().aggregate(faturamento_total=Sum('valor'))
+
+        return faturamento_total['faturamento_total']
+
 
     @property
     def lucro(self):
